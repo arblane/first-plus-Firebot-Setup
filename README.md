@@ -3,16 +3,17 @@
 Firebot setup for chat to claim first, second, and third. With claim history and customizable bonus awards.
 
 # Install
-To install, simply download the First Plus.firebotsetup
+To install, download the file First Plus.firebotsetup
 
-Import setup for Firebot by going to Settings > Setups > Import Setup
+Import setup for Firebot by going to Settings > Setups > Import Setup.
 
-Chose the file "First Plus.firebotsetup" from the location you just downloaded it to, then click Import setup
+Choose the file "First Plus.firebotsetup" from the location you just downloaded it to, then click Import setup.
 
 # Usage
+
 ## Requirements for Chat
 + Must be following the channel
-+ Chat user can not claim all three tiers in one stream ie. Can only claim first not second and third
++ Chat user can not claim all three tiers in one stream ie. Chat user can only claim first not second and third.
 
 ## Commands for Chat
 + !first - Claim first
@@ -24,15 +25,16 @@ Chose the file "First Plus.firebotsetup" from the location you just downloaded i
 
 ## Customization
 + Currency - Use your bot currency
-+ Bonus Awards for each tier - Custom counters control the bonus amount award
++ Bonus Awards for each tier - Custom counters control the bonus amount award.
++ You can disable the second and third commands and retain all the functionality of the first command.
 
 ## Other information
-+ User history stored via MetaData - Currently used to show how many times the user claimed a particular tier when claiming it
++ User history stored via MetaData - Currently used to show how many times the user claimed a particular tier when claiming it.
 
 ## Upcoming improvements/changes
-+ Add a multiplier for extra bonus awards based on the number of times a tier was claimed
++ Add a multiplier for extra bonus awards based on the number of times a tier was claimed.
 
 # Credits
-Modeled after a setup posted by Runesun
+Modeled after a setup posted by Runesun.
 
 
