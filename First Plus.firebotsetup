@@ -1,7 +1,7 @@
 {
   "name": "First Plus",
   "description": "Provides chat a chance to earn extra bot currency for first, second and third. This also logs their achievement in their metadata for use in a response message or maybe a bonus multiplier (to be coded). The bonus amounts are counters and can be customized.",
-  "version": 1,
+  "version": 1.1,
   "author": "arblane",
   "components": {
     "commands": [
@@ -268,7 +268,7 @@
             {
               "id": "3d3fd9e0-d888-11ed-a382-6f4f5935faa6",
               "type": "firebot:followcheck",
-              "value": "arblane"
+              "value": "$streamer"
             }
           ],
           "mode": "all",
@@ -478,7 +478,7 @@
             {
               "id": "4c0289a0-d888-11ed-a382-6f4f5935faa6",
               "type": "firebot:followcheck",
-              "value": "arblane"
+              "value": "$streamer"
             }
           ],
           "mode": "all",
@@ -688,7 +688,7 @@
             {
               "id": "58f33880-d888-11ed-a382-6f4f5935faa6",
               "type": "firebot:followcheck",
-              "value": "arblane"
+              "value": "$streamer"
             }
           ],
           "mode": "all",
