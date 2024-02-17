@@ -2,7 +2,7 @@
 Firebot setup for chat to claim first, second, and third. With claim history and customizable bonus awards.
 
 # Compatibility
-+ Firebot 5.58.0+
++ Firebot 5.61.1+
 
 # Install
 + Download
@@ -34,6 +34,7 @@ Firebot setup for chat to claim first, second, and third. With claim history and
 + Bonus Awards for each tier
     + Custom counters control the bonus amount award.
 + You can disable the second and third commands and retain all the functionality of the first command.
++ Customize/disable the sound effect for claiming a place
 
 ## Other information
 + User history stored via MetaData

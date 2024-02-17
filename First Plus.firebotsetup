@@ -1,7 +1,7 @@
 {
   "name": "First plus",
   "description": "Provides chat a chance to earn extra bot currency for first, second and third. This also logs their achievement in their metadata for use in a response message or maybe a bonus multiplier (to be coded). The bonus amounts are counters and can be customized.",
-  "version": 1.1,
+  "version": 2.1,
   "author": "arblane",
   "components": {
     "commands": [
@@ -9,277 +9,32 @@
         "active": true,
         "simple": false,
         "sendCooldownMessage": true,
+        "cooldownMessage": "This command is still on cooldown for: {timeLeft}",
         "cooldown": {},
         "effects": {
-          "id": "538813a0-8c69-469a-a734-215299b2acb8",
+          "id": "2cebffe5-572e-4b19-a3b8-3cca649bdc22",
           "list": [
             {
-              "id": "0643dfe0-7f43-11eb-8900-675e20a052d6",
-              "type": "firebot:customvariable",
-              "ttl": 0,
-              "name": "first",
-              "variableData": "null",
-              "active": true
-            },
-            {
-              "id": "0643dfe1-7f43-11eb-8900-675e20a052d6",
-              "type": "firebot:customvariable",
-              "ttl": 0,
-              "name": "second",
-              "variableData": "null",
-              "active": true
-            },
-            {
-              "id": "0643dfe2-7f43-11eb-8900-675e20a052d6",
-              "type": "firebot:customvariable",
-              "ttl": 0,
-              "name": "third",
-              "variableData": "null",
-              "active": true
-            },
-            {
-              "id": "0643dfe6-7f43-11eb-8900-675e20a052d6",
-              "type": "firebot:chat",
-              "chatter": "Bot",
-              "message": "First settings have been reset.",
-              "active": true
+              "id": "ff47d2d0-ab29-11ee-9699-45831a3bda6f",
+              "type": "firebot:run-effect-list",
+              "active": true,
+              "listType": "preset",
+              "presetListArgs": {
+                "user": "$username",
+                "variant": "$lowercase[$replace[$commandTrigger, \"!\", \"\"]]"
+              },
+              "effectList": {
+                "list": [],
+                "id": "ff49cea0-ab29-11ee-9699-45831a3bda6f"
+              },
+              "presetListId": "be620ba0-ab1a-11ee-9699-45831a3bda6f"
             }
           ]
         },
         "restrictionData": {
           "restrictions": [
             {
-              "id": "00cb4530-7f43-11eb-8900-675e20a052d6",
-              "type": "firebot:permissions",
-              "mode": "roles",
-              "roleIds": [
-                "broadcaster"
-              ]
-            }
-          ],
-          "mode": "all",
-          "sendFailMessage": true,
-          "failMessage": "Sorry, you cannot use this command because: {reason}"
-        },
-        "ignoreBot": true,
-        "sortTags": [
-          "b727660e-070e-47e7-a61d-059efacd941c",
-          "6301e924-e9b8-4ff7-a4b9-373d05df1ad8"
-        ],
-        "trigger": "!resetfirst",
-        "description": "Resets first in case something went wrong",
-        "id": "07a851e0-7f43-11eb-8900-675e20a052d6",
-        "createdBy": "runesun",
-        "createdAt": "2021-03-07T07:45:43-05:00",
-        "count": 10,
-        "lastEditBy": "arblane",
-        "lastEditAt": "2023-04-11T14:11:02-04:00",
-        "cooldownMessage": "This command is still on cooldown for: {timeLeft}",
-        "aliases": [],
-        "treatQuotedTextAsSingleArg": false,
-        "hidden": true
-      },
-      {
-        "active": true,
-        "simple": false,
-        "sendCooldownMessage": true,
-        "cooldownMessage": "This command is still on cooldown for: {timeLeft}",
-        "cooldown": {},
-        "effects": {
-          "id": "df1a9959-3fc1-4495-9c79-c99bd32eeca6",
-          "list": [
-            {
-              "id": "b9f24e50-d888-11ed-a382-6f4f5935faa6",
-              "type": "firebot:conditional-effects",
-              "active": true,
-              "ifs": [
-                {
-                  "conditionData": {
-                    "mode": "exclusive",
-                    "conditions": [
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is",
-                        "rightSideValue": "$customVariable[first]"
-                      }
-                    ]
-                  },
-                  "effectData": {
-                    "list": [
-                      {
-                        "id": "cbf2eb00-d888-11ed-a382-6f4f5935faa6",
-                        "type": "firebot:chat",
-                        "active": true,
-                        "chatter": "Streamer",
-                        "message": "$user, you are already first!"
-                      }
-                    ],
-                    "id": "b9f55b90-d888-11ed-a382-6f4f5935faa6"
-                  },
-                  "label": "Already claimed first"
-                },
-                {
-                  "conditionData": {
-                    "mode": "exclusive",
-                    "conditions": [
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is not",
-                        "rightSideValue": "$customVariable[first]"
-                      },
-                      {
-                        "type": "firebot:custom",
-                        "comparisonType": "is not",
-                        "value": null,
-                        "leftSideValue": "$customVariable[first]"
-                      }
-                    ]
-                  },
-                  "effectData": {
-                    "list": [
-                      {
-                        "id": "124d04f0-d889-11ed-a382-6f4f5935faa6",
-                        "type": "firebot:chat",
-                        "active": true,
-                        "chatter": "Streamer",
-                        "message": "Sorry, $customVariable[first] is already first this stream."
-                      }
-                    ],
-                    "id": "00124570-d889-11ed-a382-6f4f5935faa6"
-                  },
-                  "label": "Someone else claimed first"
-                },
-                {
-                  "conditionData": {
-                    "mode": "inclusive",
-                    "conditions": [
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is",
-                        "rightSideValue": "$customVariable[second]"
-                      },
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is",
-                        "rightSideValue": "$customVariable[third]"
-                      }
-                    ]
-                  },
-                  "effectData": {
-                    "list": [
-                      {
-                        "id": "cd5dba10-d892-11ed-ba32-4d21b19b9ac7",
-                        "type": "firebot:chat",
-                        "active": true,
-                        "chatter": "Streamer",
-                        "message": "Sorry $user, you have already claimed a place this stream!"
-                      }
-                    ],
-                    "id": "b67d8e60-d892-11ed-ba32-4d21b19b9ac7"
-                  },
-                  "label": "Already claimed second or third"
-                }
-              ],
-              "otherwiseEffectData": {
-                "list": [
-                  {
-                    "id": "42971470-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:customvariable",
-                    "ttl": 0,
-                    "name": "first",
-                    "variableData": "$user",
-                    "active": true,
-                    "effectLabel": "Holds the user name that got First"
-                  },
-                  {
-                    "id": "16e04820-e1de-11ed-89e6-b1cb35255343",
-                    "type": "firebot:customvariable",
-                    "active": true,
-                    "ttl": 5,
-                    "name": "first variant",
-                    "variableData": "$lowercase[$replace[$commandTrigger, \"!\", \"\"]]",
-                    "effectLabel": "first variant"
-                  },
-                  {
-                    "id": "42971472-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:run-effect-list",
-                    "active": true,
-                    "listType": "preset",
-                    "presetListArgs": {
-                      "claim": "first",
-                      "user": "$user",
-                      "firstVariant": "$customVariable[first variant]"
-                    },
-                    "effectList": {
-                      "list": [],
-                      "id": "d8734e60-cfe1-11ed-a52f-5bdbbc96a943"
-                    },
-                    "presetListId": "fbacd250-cfde-11ed-a52f-5bdbbc96a943",
-                    "effectLabel": "Update First Variant Metadata for user"
-                  },
-                  {
-                    "id": "727b8450-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:run-effect-list",
-                    "active": true,
-                    "listType": "preset",
-                    "presetListArgs": {
-                      "user": "$user",
-                      "firstVariant": "$customVariable[first variant]"
-                    },
-                    "effectList": {
-                      "list": [],
-                      "id": "727e1c60-d889-11ed-a382-6f4f5935faa6"
-                    },
-                    "presetListId": "a3160c80-d883-11ed-a382-6f4f5935faa6",
-                    "effectLabel": "Update the Bonus Currency"
-                  },
-                  {
-                    "id": "42971475-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:chat",
-                    "chatter": "Bot",
-                    "message": "Congratulations $user! You were first! You've earned $counter[BonusForFirst] BotThings!",
-                    "active": true
-                  },
-                  {
-                    "id": "5546fc90-d88c-11ed-ba32-4d21b19b9ac7",
-                    "type": "firebot:run-effect-list",
-                    "active": true,
-                    "listType": "preset",
-                    "presetListArgs": {
-                      "user": "$user",
-                      "firstVariant": "$customVariable[first variant]"
-                    },
-                    "effectList": {
-                      "list": [],
-                      "id": "554994a0-d88c-11ed-ba32-4d21b19b9ac7"
-                    },
-                    "presetListId": "e8eba7f0-cfe2-11ed-a52f-5bdbbc96a943",
-                    "effectLabel": "Display the number of times user was firstVariant"
-                  },
-                  {
-                    "id": "42971476-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:playsound",
-                    "active": true,
-                    "soundType": "local",
-                    "volume": 7,
-                    "audioOutputDevice": {
-                      "label": "Send To Overlay",
-                      "deviceId": "overlay"
-                    },
-                    "filepath": "E:\\Streaming\\Assets\\Sounds\\tada\\397354__plasterbrain__tada-fanfare-f.flac"
-                  }
-                ],
-                "id": "b9f3fc00-d888-11ed-a382-6f4f5935faa6"
-              },
-              "otherwiseLabel": "First can be claimed"
-            }
-          ],
-          "queue": "68dee870-ce83-11ed-a85b-135af14bc7e9"
-        },
-        "restrictionData": {
-          "restrictions": [
-            {
-              "id": "3d3fd9e0-d888-11ed-a382-6f4f5935faa6",
+              "id": "d61902b0-abf3-11ee-9699-45831a3bda6f",
               "type": "firebot:followcheck",
               "value": "$streamer"
             }
@@ -288,465 +43,75 @@
           "sendFailMessage": true,
           "failMessage": "Sorry, you cannot use this command because: {reason}"
         },
-        "aliases": [],
+        "aliases": [
+          "!second",
+          "!third"
+        ],
         "sortTags": [
           "6301e924-e9b8-4ff7-a4b9-373d05df1ad8"
         ],
         "treatQuotedTextAsSingleArg": false,
         "trigger": "!first",
-        "ignoreBot": true,
-        "id": "41fa7bc0-d888-11ed-a382-6f4f5935faa6",
-        "createdBy": "arblane",
-        "createdAt": "2023-04-11T12:45:25-04:00",
-        "count": 9,
-        "lastEditBy": "arblane",
-        "lastEditAt": "2023-04-23T09:57:33-04:00"
-      },
-      {
-        "active": true,
-        "simple": false,
-        "sendCooldownMessage": true,
-        "cooldownMessage": "This command is still on cooldown for: {timeLeft}",
-        "cooldown": {},
-        "effects": {
-          "id": "582e9f31-ca71-4c41-a33d-c4f84fc4aca3",
-          "list": [
-            {
-              "id": "e6bd3da0-d892-11ed-ba32-4d21b19b9ac7",
-              "type": "firebot:conditional-effects",
-              "active": true,
-              "ifs": [
+        "subCommands": [
+          {
+            "active": true,
+            "id": "8e69d6ad-2488-4d43-ae0d-0490a531b2dc",
+            "type": "Custom",
+            "arg": "reset",
+            "regex": false,
+            "fallback": false,
+            "restrictionData": {
+              "restrictions": [
                 {
-                  "conditionData": {
-                    "mode": "exclusive",
-                    "conditions": [
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is",
-                        "rightSideValue": "$customVariable[second]"
-                      }
-                    ]
-                  },
-                  "effectData": {
-                    "list": [
-                      {
-                        "id": "cbf2eb00-d888-11ed-a382-6f4f5935faa6",
-                        "type": "firebot:chat",
-                        "active": true,
-                        "chatter": "Streamer",
-                        "message": "$user, you are already second!"
-                      }
-                    ],
-                    "id": "b9f55b90-d888-11ed-a382-6f4f5935faa6"
-                  },
-                  "label": "Already claimed second"
-                },
-                {
-                  "conditionData": {
-                    "mode": "exclusive",
-                    "conditions": [
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is not",
-                        "rightSideValue": "$customVariable[second]"
-                      },
-                      {
-                        "type": "firebot:custom",
-                        "comparisonType": "is not",
-                        "value": null,
-                        "leftSideValue": "$customVariable[second]"
-                      }
-                    ]
-                  },
-                  "effectData": {
-                    "list": [
-                      {
-                        "id": "124d04f0-d889-11ed-a382-6f4f5935faa6",
-                        "type": "firebot:chat",
-                        "active": true,
-                        "chatter": "Streamer",
-                        "message": "Sorry, $customVariable[second] is already second this stream."
-                      }
-                    ],
-                    "id": "00124570-d889-11ed-a382-6f4f5935faa6"
-                  },
-                  "label": "Someone else claimed second"
-                },
-                {
-                  "conditionData": {
-                    "mode": "inclusive",
-                    "conditions": [
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is",
-                        "rightSideValue": "$customVariable[first]"
-                      },
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is",
-                        "rightSideValue": "$customVariable[third]"
-                      }
-                    ]
-                  },
-                  "effectData": {
-                    "list": [
-                      {
-                        "id": "cd5dba10-d892-11ed-ba32-4d21b19b9ac7",
-                        "type": "firebot:chat",
-                        "active": true,
-                        "chatter": "Streamer",
-                        "message": "Sorry $user, you have already claimed a place this stream!"
-                      }
-                    ],
-                    "id": "b67d8e60-d892-11ed-ba32-4d21b19b9ac7"
-                  },
-                  "label": "Already claimed first or third"
+                  "id": "56afd3f0-ab49-11ee-9699-45831a3bda6f",
+                  "type": "firebot:permissions",
+                  "mode": "roles",
+                  "roleIds": [
+                    "broadcaster"
+                  ]
                 }
               ],
-              "otherwiseEffectData": {
-                "list": [
-                  {
-                    "id": "42971470-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:customvariable",
-                    "ttl": 0,
-                    "name": "second",
-                    "variableData": "$user",
-                    "active": true,
-                    "effectLabel": "Holds the user name that got Second"
-                  },
-                  {
-                    "id": "0ba70d40-e1de-11ed-89e6-b1cb35255343",
-                    "type": "firebot:customvariable",
-                    "active": true,
-                    "ttl": 5,
-                    "name": "first variant",
-                    "variableData": "$lowercase[$replace[$commandTrigger, \"!\", \"\"]]",
-                    "effectLabel": "first variant"
-                  },
-                  {
-                    "id": "42971472-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:run-effect-list",
-                    "active": true,
-                    "listType": "preset",
-                    "presetListArgs": {
-                      "claim": "first",
-                      "user": "$user",
-                      "firstVariant": "$customVariable[first variant]"
-                    },
-                    "effectList": {
-                      "list": [],
-                      "id": "d8734e60-cfe1-11ed-a52f-5bdbbc96a943"
-                    },
-                    "presetListId": "fbacd250-cfde-11ed-a52f-5bdbbc96a943",
-                    "effectLabel": "Update First Variant Metadata for user"
-                  },
-                  {
-                    "id": "727b8450-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:run-effect-list",
-                    "active": true,
-                    "listType": "preset",
-                    "presetListArgs": {
-                      "user": "$user",
-                      "firstVariant": "$customVariable[first variant]"
-                    },
-                    "effectList": {
-                      "list": [],
-                      "id": "727e1c60-d889-11ed-a382-6f4f5935faa6"
-                    },
-                    "presetListId": "a3160c80-d883-11ed-a382-6f4f5935faa6",
-                    "effectLabel": "Update the Bonus Currency"
-                  },
-                  {
-                    "id": "42971475-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:chat",
-                    "chatter": "Bot",
-                    "message": "Congratulations $user! You were second! You've earned $counter[BonusForFirst] BotThings!",
-                    "active": true
-                  },
-                  {
-                    "id": "5546fc90-d88c-11ed-ba32-4d21b19b9ac7",
-                    "type": "firebot:run-effect-list",
-                    "active": true,
-                    "listType": "preset",
-                    "presetListArgs": {
-                      "user": "$user",
-                      "firstVariant": "$customVariable[first variant]"
-                    },
-                    "effectList": {
-                      "list": [],
-                      "id": "554994a0-d88c-11ed-ba32-4d21b19b9ac7"
-                    },
-                    "presetListId": "e8eba7f0-cfe2-11ed-a52f-5bdbbc96a943",
-                    "effectLabel": "Display the number of times user was firstVariant"
-                  },
-                  {
-                    "id": "42971476-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:playsound",
-                    "active": true,
-                    "soundType": "local",
-                    "volume": 7,
-                    "audioOutputDevice": {
-                      "label": "Send To Overlay",
-                      "deviceId": "overlay"
-                    },
-                    "filepath": "E:\\Streaming\\Assets\\Sounds\\tada\\397353__plasterbrain__tada-fanfare-g.flac"
-                  }
-                ],
-                "id": "b9f3fc00-d888-11ed-a382-6f4f5935faa6"
-              },
-              "otherwiseLabel": "Can claim second"
-            }
-          ],
-          "queue": "68dee870-ce83-11ed-a85b-135af14bc7e9"
-        },
-        "restrictionData": {
-          "restrictions": [
-            {
-              "id": "4c0289a0-d888-11ed-a382-6f4f5935faa6",
-              "type": "firebot:followcheck",
-              "value": "$streamer"
-            }
-          ],
-          "mode": "all",
-          "sendFailMessage": true,
-          "failMessage": "Sorry, you cannot use this command because: {reason}"
-        },
-        "aliases": [],
-        "sortTags": [
-          "6301e924-e9b8-4ff7-a4b9-373d05df1ad8"
-        ],
-        "treatQuotedTextAsSingleArg": false,
-        "trigger": "!second",
-        "ignoreBot": true,
-        "id": "50bc8f40-d888-11ed-a382-6f4f5935faa6",
-        "createdBy": "arblane",
-        "createdAt": "2023-04-11T12:45:50-04:00",
-        "count": 6,
-        "lastEditBy": "arblane",
-        "lastEditAt": "2023-04-23T09:52:21-04:00"
-      },
-      {
-        "active": true,
-        "simple": false,
-        "sendCooldownMessage": true,
-        "cooldownMessage": "This command is still on cooldown for: {timeLeft}",
-        "cooldown": {},
-        "effects": {
-          "id": "7b69b1cc-2c30-444b-a387-5c617833f8d4",
-          "list": [
-            {
-              "id": "16a9c3d0-d893-11ed-ba32-4d21b19b9ac7",
-              "type": "firebot:conditional-effects",
-              "active": true,
-              "ifs": [
+              "mode": "all",
+              "sendFailMessage": false,
+              "useCustomFailMessage": false,
+              "failMessage": "Sorry, you cannot use this command because: {reason}"
+            },
+            "effects": {
+              "list": [
                 {
-                  "conditionData": {
-                    "mode": "exclusive",
-                    "conditions": [
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is",
-                        "rightSideValue": "$customVariable[third]"
-                      }
-                    ]
-                  },
-                  "effectData": {
-                    "list": [
-                      {
-                        "id": "cbf2eb00-d888-11ed-a382-6f4f5935faa6",
-                        "type": "firebot:chat",
-                        "active": true,
-                        "chatter": "Streamer",
-                        "message": "$user, you are already third!"
-                      }
-                    ],
-                    "id": "b9f55b90-d888-11ed-a382-6f4f5935faa6"
-                  },
-                  "label": "Already claimed third"
+                  "id": "7a332420-abe0-11ee-9699-45831a3bda6f",
+                  "type": "firebot:customvariable",
+                  "active": true,
+                  "ttl": 0,
+                  "name": "places",
+                  "variableData": "{\"first\":\"\",\"second\":\"\",\"third\":\"\"}",
+                  "effectLabel": "Default Places Object"
                 },
                 {
-                  "conditionData": {
-                    "mode": "exclusive",
-                    "conditions": [
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is not",
-                        "rightSideValue": "$customVariable[third]"
-                      },
-                      {
-                        "type": "firebot:custom",
-                        "comparisonType": "is not",
-                        "value": null,
-                        "leftSideValue": "$customVariable[third]"
-                      }
-                    ]
-                  },
-                  "effectData": {
-                    "list": [
-                      {
-                        "id": "124d04f0-d889-11ed-a382-6f4f5935faa6",
-                        "type": "firebot:chat",
-                        "active": true,
-                        "chatter": "Streamer",
-                        "message": "Sorry, $customVariable[third] is already third this stream."
-                      }
-                    ],
-                    "id": "00124570-d889-11ed-a382-6f4f5935faa6"
-                  },
-                  "label": "Someone else claimed third"
-                },
-                {
-                  "conditionData": {
-                    "mode": "inclusive",
-                    "conditions": [
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is",
-                        "rightSideValue": "$customVariable[second]"
-                      },
-                      {
-                        "type": "firebot:username",
-                        "comparisonType": "is",
-                        "rightSideValue": "$customVariable[first]"
-                      }
-                    ]
-                  },
-                  "effectData": {
-                    "list": [
-                      {
-                        "id": "cd5dba10-d892-11ed-ba32-4d21b19b9ac7",
-                        "type": "firebot:chat",
-                        "active": true,
-                        "chatter": "Streamer",
-                        "message": "Sorry $user, you have already claimed a place this stream!"
-                      }
-                    ],
-                    "id": "b67d8e60-d892-11ed-ba32-4d21b19b9ac7"
-                  },
-                  "label": "Already claimed first or second"
+                  "id": "0aec43d0-abf4-11ee-9699-45831a3bda6f",
+                  "type": "firebot:chat",
+                  "chatter": "Bot",
+                  "message": "First settings have been reset.",
+                  "active": true,
+                  "sendAsReply": true
                 }
               ],
-              "otherwiseEffectData": {
-                "list": [
-                  {
-                    "id": "42971470-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:customvariable",
-                    "ttl": 0,
-                    "name": "third",
-                    "variableData": "$user",
-                    "active": true,
-                    "effectLabel": "Holds the user name that got Third"
-                  },
-                  {
-                    "id": "d6b1c530-e1dd-11ed-89e6-b1cb35255343",
-                    "type": "firebot:customvariable",
-                    "active": true,
-                    "ttl": 5,
-                    "name": "first variant",
-                    "variableData": "$lowercase[$replace[$commandTrigger, \"!\", \"\"]]",
-                    "effectLabel": "first variant"
-                  },
-                  {
-                    "id": "42971472-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:run-effect-list",
-                    "active": true,
-                    "listType": "preset",
-                    "presetListArgs": {
-                      "claim": "first",
-                      "user": "$user",
-                      "firstVariant": "$customVariable[first variant]"
-                    },
-                    "effectList": {
-                      "list": [],
-                      "id": "d8734e60-cfe1-11ed-a52f-5bdbbc96a943"
-                    },
-                    "presetListId": "fbacd250-cfde-11ed-a52f-5bdbbc96a943",
-                    "effectLabel": "Update First Variant Metadata for user"
-                  },
-                  {
-                    "id": "727b8450-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:run-effect-list",
-                    "active": true,
-                    "listType": "preset",
-                    "presetListArgs": {
-                      "user": "$user",
-                      "firstVariant": "$customVariable[first variant]"
-                    },
-                    "effectList": {
-                      "list": [],
-                      "id": "727e1c60-d889-11ed-a382-6f4f5935faa6"
-                    },
-                    "presetListId": "a3160c80-d883-11ed-a382-6f4f5935faa6",
-                    "effectLabel": "Update the Bonus Currency"
-                  },
-                  {
-                    "id": "42971475-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:chat",
-                    "chatter": "Bot",
-                    "message": "Congratulations $user! You were third! You've earned $counter[BonusForFirst] BotThings!",
-                    "active": true
-                  },
-                  {
-                    "id": "5546fc90-d88c-11ed-ba32-4d21b19b9ac7",
-                    "type": "firebot:run-effect-list",
-                    "active": true,
-                    "listType": "preset",
-                    "presetListArgs": {
-                      "user": "$user",
-                      "firstVariant": "$customVariable[first variant]"
-                    },
-                    "effectList": {
-                      "list": [],
-                      "id": "554994a0-d88c-11ed-ba32-4d21b19b9ac7"
-                    },
-                    "presetListId": "e8eba7f0-cfe2-11ed-a52f-5bdbbc96a943",
-                    "effectLabel": "Display the number of times user was firstVariant"
-                  },
-                  {
-                    "id": "42971476-d889-11ed-a382-6f4f5935faa6",
-                    "type": "firebot:playsound",
-                    "active": true,
-                    "soundType": "local",
-                    "volume": 7,
-                    "audioOutputDevice": {
-                      "label": "Send To Overlay",
-                      "deviceId": "overlay"
-                    },
-                    "filepath": "E:\\Streaming\\Assets\\Sounds\\tada\\397355__plasterbrain__tada-fanfare-a.flac"
-                  }
-                ],
-                "id": "b9f3fc00-d888-11ed-a382-6f4f5935faa6"
-              },
-              "otherwiseLabel": "Can claim third"
-            }
-          ],
-          "queue": "68dee870-ce83-11ed-a85b-135af14bc7e9"
-        },
-        "restrictionData": {
-          "restrictions": [
-            {
-              "id": "58f33880-d888-11ed-a382-6f4f5935faa6",
-              "type": "firebot:followcheck",
-              "value": "$streamer"
-            }
-          ],
-          "mode": "all",
-          "sendFailMessage": true,
-          "failMessage": "Sorry, you cannot use this command because: {reason}"
-        },
-        "aliases": [],
-        "sortTags": [
-          "6301e924-e9b8-4ff7-a4b9-373d05df1ad8"
+              "id": "4003b090-ab49-11ee-9699-45831a3bda6f"
+            },
+            "description": "Resets the places list",
+            "hidden": true
+          }
         ],
-        "treatQuotedTextAsSingleArg": false,
-        "trigger": "!third",
         "ignoreBot": true,
-        "id": "5e38b540-d888-11ed-a382-6f4f5935faa6",
+        "ignoreWhispers": true,
+        "description": "Claim a place per stream session",
+        "id": "b425a980-ab29-11ee-9699-45831a3bda6f",
         "createdBy": "arblane",
-        "createdAt": "2023-04-11T12:46:12-04:00",
-        "count": 3,
+        "createdAt": "2024-01-04T12:50:09-05:00",
+        "count": 78,
         "lastEditBy": "arblane",
-        "lastEditAt": "2023-04-23T09:51:56-04:00"
+        "lastEditAt": "2024-01-05T12:58:41-05:00",
+        "type": "custom"
       }
     ],
     "counters": [
@@ -766,7 +131,8 @@
           "id": "28b3b300-79e1-11eb-a7ef-c17b486f445b",
           "list": []
         },
-        "value": 250
+        "value": 250,
+        "sortTags": []
       },
       {
         "id": "c4e93eef-3798-4eaf-980f-1c9c16fd2294",
@@ -784,7 +150,8 @@
           "id": "35f4cbd0-79e1-11eb-a7ef-c17b486f445b",
           "list": []
         },
-        "value": 125
+        "value": 125,
+        "sortTags": []
       },
       {
         "id": "0e1b50b3-0e52-4de9-acdc-ee254bb29936",
@@ -802,7 +169,8 @@
           "id": "42eb2000-79e1-11eb-a7ef-c17b486f445b",
           "list": []
         },
-        "value": 50
+        "value": 50,
+        "sortTags": []
       }
     ],
     "currencies": [
@@ -814,7 +182,15 @@
         "interval": 5,
         "limit": 0,
         "transfer": "Allow",
-        "bonus": {}
+        "bonus": {
+          "b05717a0-df0d-11ed-becd-0fc137b93642": -100,
+          "viewerlistbot": -100,
+          "ed11f200-ce82-11ed-a85b-135af14bc7e9": 150,
+          "sub": null,
+          "tier1": 200,
+          "tier2": 300,
+          "tier3": 500
+        }
       }
     ],
     "effectQueues": [
@@ -823,7 +199,9 @@
         "mode": "auto",
         "sortTags": [],
         "id": "68dee870-ce83-11ed-a85b-135af14bc7e9",
-        "interval": 10
+        "interval": 10,
+        "active": true,
+        "length": 0
       }
     ],
     "events": [],
@@ -843,7 +221,7 @@
                 "claim": "$presetListArg[first variant]",
                 "user": "$presetListArg[user]",
                 "first variant": "$presetListArg[firstVariant]",
-                "firstVariant": "$presetListArg[firstVariant]"
+                "firstVariant": "$presetListArg[variant]"
               },
               "effectList": {
                 "list": [],
@@ -908,7 +286,7 @@
             "name": "user"
           },
           {
-            "name": "firstVariant"
+            "name": "variant"
           }
         ],
         "sortTags": [
@@ -943,7 +321,7 @@
               "type": "firebot:chat",
               "active": true,
               "chatter": "Streamer",
-              "message": "You have claimed $presetListArg[firstVariant] $customVariable[$presetListArg[user]-$presetListArg[firstVariant]-count] times!"
+              "message": "$username has claimed $presetListArg[firstVariant] $customVariable[$presetListArg[user]-$presetListArg[firstVariant]-count] times!"
             }
           ],
           "id": "e8ebcf00-cfe2-11ed-a52f-5bdbbc96a943"
@@ -1006,7 +384,7 @@
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$presetListArg[firstVariant]",
+                        "leftSideValue": "$presetListArg[variant]",
                         "rightSideValue": "first"
                       }
                     ]
@@ -1023,7 +401,16 @@
                         "target": "individual",
                         "chatter": "Streamer",
                         "amount": "$counter[BonusForFirst]",
-                        "userTarget": "$user"
+                        "userTarget": "$presetListArg[user]"
+                      },
+                      {
+                        "id": "02d91c60-abd9-11ee-9699-45831a3bda6f",
+                        "type": "firebot:customvariable",
+                        "active": true,
+                        "ttl": 90,
+                        "name": "$presetListArg[variant]-message",
+                        "variableData": "$customVariable[$presetListArg[variant]-message] You have earned $counter[BonusForFirst] bonus BotThings.",
+                        "effectLabel": "$presetListArg[variant]-message"
                       }
                     ],
                     "id": "daa9cd30-d883-11ed-a382-6f4f5935faa6"
@@ -1037,7 +424,7 @@
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$presetListArg[firstVariant]",
+                        "leftSideValue": "$presetListArg[variant]",
                         "rightSideValue": "second"
                       }
                     ]
@@ -1054,7 +441,16 @@
                         "target": "individual",
                         "chatter": "Streamer",
                         "amount": "$counter[BonusForSecond]",
-                        "userTarget": "$user"
+                        "userTarget": "$presetListArg[user]"
+                      },
+                      {
+                        "id": "19448d40-abd9-11ee-9699-45831a3bda6f",
+                        "type": "firebot:customvariable",
+                        "active": true,
+                        "ttl": 90,
+                        "name": "$presetListArg[variant]-message",
+                        "variableData": "$customVariable[$presetListArg[variant]-message] You have earned $counter[BonusForSecond] bonus BotThings.",
+                        "effectLabel": "$presetListArg[variant]-message"
                       }
                     ],
                     "id": "f18b3160-d883-11ed-a382-6f4f5935faa6"
@@ -1068,7 +464,7 @@
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$presetListArg[firstVariant]",
+                        "leftSideValue": "$presetListArg[variant]",
                         "rightSideValue": "third"
                       }
                     ]
@@ -1085,7 +481,16 @@
                         "target": "individual",
                         "chatter": "Streamer",
                         "amount": "$counter[BonusForThird]",
-                        "userTarget": "$user"
+                        "userTarget": "$presetListArg[user]"
+                      },
+                      {
+                        "id": "19448d40-abd9-11ee-9699-45831a3bda6f",
+                        "type": "firebot:customvariable",
+                        "active": true,
+                        "ttl": 90,
+                        "name": "$presetListArg[variant]-message",
+                        "variableData": "$customVariable[$presetListArg[variant]-message] You have earned $counter[BonusForThird] bonus BotThings.",
+                        "effectLabel": "$presetListArg[variant]-message"
                       }
                     ],
                     "id": "fe9d4af0-d883-11ed-a382-6f4f5935faa6"
@@ -1105,13 +510,596 @@
             "name": "user"
           },
           {
-            "name": "firstVariant"
+            "name": "variant"
           }
         ],
         "sortTags": [
           "05d21925-f98a-4663-bec8-4553ea78a553"
         ],
         "id": "a3160c80-d883-11ed-a382-6f4f5935faa6"
+      },
+      {
+        "name": "[First] Place",
+        "effects": {
+          "list": [
+            {
+              "id": "101b8e60-abd1-11ee-9699-45831a3bda6f",
+              "type": "firebot:conditional-effects",
+              "active": true,
+              "ifs": [
+                {
+                  "conditionData": {
+                    "mode": "exclusive",
+                    "conditions": [
+                      {
+                        "type": "firebot:custom",
+                        "comparisonType": "is",
+                        "value": null,
+                        "leftSideValue": "$customVariable[places]"
+                      }
+                    ]
+                  },
+                  "effectData": {
+                    "list": [
+                      {
+                        "id": "b6f66890-abe0-11ee-9699-45831a3bda6f",
+                        "type": "firebot:customvariable",
+                        "active": true,
+                        "ttl": 0,
+                        "name": "places",
+                        "variableData": "{\"first\":\"\",\"second\":\"\",\"third\":\"\"}",
+                        "effectLabel": "Default Places Object"
+                      }
+                    ],
+                    "id": "4b2f44c0-ab26-11ee-9699-45831a3bda6f"
+                  },
+                  "label": "Places Object is NULL"
+                }
+              ],
+              "otherwiseEffectData": {
+                "list": [],
+                "id": "4b2e0c40-ab26-11ee-9699-45831a3bda6f"
+              },
+              "effectLabel": "Predefine Places Object if NULL"
+            },
+            {
+              "id": "101b8e61-abd1-11ee-9699-45831a3bda6f",
+              "type": "firebot:conditional-effects",
+              "active": true,
+              "ifs": [
+                {
+                  "conditionData": {
+                    "mode": "inclusive",
+                    "conditions": [
+                      {
+                        "type": "firebot:custom",
+                        "comparisonType": "is",
+                        "value": null,
+                        "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                        "rightSideValue": "first"
+                      },
+                      {
+                        "type": "firebot:custom",
+                        "comparisonType": "is",
+                        "value": null,
+                        "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                        "rightSideValue": "second"
+                      },
+                      {
+                        "type": "firebot:custom",
+                        "comparisonType": "is",
+                        "value": null,
+                        "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                        "rightSideValue": "third"
+                      }
+                    ]
+                  },
+                  "effectData": {
+                    "list": [
+                      {
+                        "id": "3f258550-abe8-11ee-9699-45831a3bda6f",
+                        "type": "firebot:conditional-effects",
+                        "active": true,
+                        "ifs": [
+                          {
+                            "conditionData": {
+                              "mode": "exclusive",
+                              "conditions": [
+                                {
+                                  "type": "firebot:custom",
+                                  "comparisonType": "contains",
+                                  "value": null,
+                                  "leftSideValue": "$$places",
+                                  "rightSideValue": "$presetListArg[user]"
+                                }
+                              ]
+                            },
+                            "effectData": {
+                              "list": [
+                                {
+                                  "id": "e5fbf080-abe8-11ee-9699-45831a3bda6f",
+                                  "type": "firebot:conditional-effects",
+                                  "active": true,
+                                  "ifs": [
+                                    {
+                                      "conditionData": {
+                                        "mode": "exclusive",
+                                        "conditions": [
+                                          {
+                                            "type": "firebot:custom",
+                                            "comparisonType": "contains",
+                                            "value": null,
+                                            "leftSideValue": "$$places",
+                                            "rightSideValue": "$presetListArg[user]"
+                                          }
+                                        ]
+                                      },
+                                      "effectData": {
+                                        "list": [
+                                          {
+                                            "id": "89e04f60-abea-11ee-9699-45831a3bda6f",
+                                            "type": "firebot:conditional-effects",
+                                            "active": true,
+                                            "ifs": [
+                                              {
+                                                "conditionData": {
+                                                  "mode": "exclusive",
+                                                  "conditions": [
+                                                    {
+                                                      "type": "firebot:custom",
+                                                      "comparisonType": "is",
+                                                      "value": null,
+                                                      "leftSideValue": "$replace[$objectWalkPath[$$places, first], \"\\\"\", \"\"]",
+                                                      "rightSideValue": "$presetListArg[user]"
+                                                    }
+                                                  ]
+                                                },
+                                                "effectData": {
+                                                  "list": [
+                                                    {
+                                                      "id": "a4c64be0-abea-11ee-9699-45831a3bda6f",
+                                                      "type": "firebot:customvariable",
+                                                      "active": true,
+                                                      "ttl": 15,
+                                                      "name": "placeClaimed",
+                                                      "effectLabel": "placeClaimed",
+                                                      "variableData": "first"
+                                                    }
+                                                  ],
+                                                  "id": "89e383b0-abea-11ee-9699-45831a3bda6f"
+                                                }
+                                              },
+                                              {
+                                                "conditionData": {
+                                                  "mode": "exclusive",
+                                                  "conditions": [
+                                                    {
+                                                      "type": "firebot:custom",
+                                                      "comparisonType": "is",
+                                                      "value": null,
+                                                      "leftSideValue": "$replace[$objectWalkPath[$$places, second], \"\\\"\", \"\"]",
+                                                      "rightSideValue": "$presetListArg[user]"
+                                                    }
+                                                  ]
+                                                },
+                                                "effectData": {
+                                                  "list": [
+                                                    {
+                                                      "id": "ccd54550-abea-11ee-9699-45831a3bda6f",
+                                                      "type": "firebot:customvariable",
+                                                      "active": true,
+                                                      "ttl": 15,
+                                                      "name": "placeClaimed",
+                                                      "effectLabel": "placeClaimed",
+                                                      "variableData": "second"
+                                                    }
+                                                  ],
+                                                  "id": "b2246290-abea-11ee-9699-45831a3bda6f"
+                                                }
+                                              },
+                                              {
+                                                "conditionData": {
+                                                  "mode": "exclusive",
+                                                  "conditions": [
+                                                    {
+                                                      "type": "firebot:custom",
+                                                      "comparisonType": "is",
+                                                      "value": null,
+                                                      "leftSideValue": "$replace[$objectWalkPath[$$places, third], \"\\\"\", \"\"]",
+                                                      "rightSideValue": "$presetListArg[user]"
+                                                    }
+                                                  ]
+                                                },
+                                                "effectData": {
+                                                  "list": [
+                                                    {
+                                                      "id": "ccd54550-abea-11ee-9699-45831a3bda6f",
+                                                      "type": "firebot:customvariable",
+                                                      "active": true,
+                                                      "ttl": 15,
+                                                      "name": "placeClaimed",
+                                                      "effectLabel": "placeClaimed",
+                                                      "variableData": "third"
+                                                    }
+                                                  ],
+                                                  "id": "b2a1a8e0-abea-11ee-9699-45831a3bda6f"
+                                                }
+                                              }
+                                            ],
+                                            "otherwiseEffectData": {
+                                              "list": [],
+                                              "id": "89e24b30-abea-11ee-9699-45831a3bda6f"
+                                            },
+                                            "effectLabel": "set placeClaimed"
+                                          },
+                                          {
+                                            "id": "528eeee0-abea-11ee-9699-45831a3bda6f",
+                                            "type": "firebot:chat",
+                                            "active": true,
+                                            "chatter": "Bot",
+                                            "message": "You have already claimed $customVariable[placeClaimed]!",
+                                            "sendAsReply": true
+                                          }
+                                        ],
+                                        "id": "3b7cb6b0-abea-11ee-9699-45831a3bda6f"
+                                      },
+                                      "label": "user has claimed a place already"
+                                    },
+                                    {
+                                      "conditionData": {
+                                        "mode": "exclusive",
+                                        "conditions": [
+                                          {
+                                            "type": "firebot:custom",
+                                            "comparisonType": "is",
+                                            "value": null,
+                                            "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                                            "rightSideValue": "first"
+                                          },
+                                          {
+                                            "type": "firebot:custom",
+                                            "comparisonType": "is not",
+                                            "value": null,
+                                            "leftSideValue": "$objectWalkPath[$$places, first]",
+                                            "rightSideValue": "\"\""
+                                          }
+                                        ]
+                                      },
+                                      "effectData": {
+                                        "list": [
+                                          {
+                                            "id": "fcfe9850-abe8-11ee-9699-45831a3bda6f",
+                                            "type": "firebot:chat",
+                                            "active": true,
+                                            "chatter": "Bot",
+                                            "message": "$replace[$objectWalkPath[$customVariable[places], first], \"\\\"\", \"\"] has already claimed first!",
+                                            "sendAsReply": true
+                                          }
+                                        ],
+                                        "id": "e6005d50-abe8-11ee-9699-45831a3bda6f"
+                                      },
+                                      "label": "someone else has already claimed first"
+                                    },
+                                    {
+                                      "conditionData": {
+                                        "mode": "exclusive",
+                                        "conditions": [
+                                          {
+                                            "type": "firebot:custom",
+                                            "comparisonType": "is",
+                                            "value": null,
+                                            "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                                            "rightSideValue": "second"
+                                          },
+                                          {
+                                            "type": "firebot:custom",
+                                            "comparisonType": "is not",
+                                            "value": null,
+                                            "leftSideValue": "$objectWalkPath[$$places, second]",
+                                            "rightSideValue": "\"\""
+                                          }
+                                        ]
+                                      },
+                                      "effectData": {
+                                        "list": [
+                                          {
+                                            "id": "1157a3f0-abe9-11ee-9699-45831a3bda6f",
+                                            "type": "firebot:chat",
+                                            "active": true,
+                                            "chatter": "Bot",
+                                            "message": "$replace[$objectWalkPath[$customVariable[places], second], \"\\\"\", \"\"] has already claimed second!",
+                                            "sendAsReply": true
+                                          }
+                                        ],
+                                        "id": "0c398550-abe9-11ee-9699-45831a3bda6f"
+                                      },
+                                      "label": "someone else has already claimed second"
+                                    },
+                                    {
+                                      "conditionData": {
+                                        "mode": "exclusive",
+                                        "conditions": [
+                                          {
+                                            "type": "firebot:custom",
+                                            "comparisonType": "is",
+                                            "value": null,
+                                            "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                                            "rightSideValue": "third"
+                                          },
+                                          {
+                                            "type": "firebot:custom",
+                                            "comparisonType": "is not",
+                                            "value": null,
+                                            "leftSideValue": "$objectWalkPath[$$places, third]"
+                                          }
+                                        ]
+                                      },
+                                      "effectData": {
+                                        "list": [
+                                          {
+                                            "id": "a76c3400-abe9-11ee-9699-45831a3bda6f",
+                                            "type": "firebot:chat",
+                                            "active": true,
+                                            "chatter": "Bot",
+                                            "message": "$replace[$objectWalkPath[$customVariable[places], third], \"\\\"\", \"\"] has already claimed third!",
+                                            "sendAsReply": true
+                                          }
+                                        ],
+                                        "id": "8ee70ae0-abe9-11ee-9699-45831a3bda6f"
+                                      },
+                                      "label": "someone else has already claimed third"
+                                    }
+                                  ],
+                                  "otherwiseEffectData": {
+                                    "list": [],
+                                    "id": "e5feafa0-abe8-11ee-9699-45831a3bda6f"
+                                  }
+                                }
+                              ],
+                              "id": "3f281d60-abe8-11ee-9699-45831a3bda6f"
+                            },
+                            "label": "User has claimed a place already"
+                          }
+                        ],
+                        "otherwiseEffectData": {
+                          "list": [
+                            {
+                              "id": "b55edf00-abe8-11ee-9699-45831a3bda6f",
+                              "type": "firebot:conditional-effects",
+                              "active": true,
+                              "ifs": [
+                                {
+                                  "conditionData": {
+                                    "mode": "exclusive",
+                                    "conditions": [
+                                      {
+                                        "type": "firebot:custom",
+                                        "comparisonType": "is",
+                                        "value": null,
+                                        "leftSideValue": "$customVariable[places,$presetListArg[variant]]"
+                                      }
+                                    ]
+                                  },
+                                  "effectData": {
+                                    "list": [
+                                      {
+                                        "id": "98017290-ab27-11ee-9699-45831a3bda6f",
+                                        "type": "firebot:customvariable",
+                                        "active": true,
+                                        "ttl": 0,
+                                        "name": "places",
+                                        "variableData": "$presetListArg[user]",
+                                        "propertyPath": "$presetListArg[variant]",
+                                        "effectLabel": "Current Stream Places"
+                                      },
+                                      {
+                                        "id": "a2c30700-abd8-11ee-9699-45831a3bda6f",
+                                        "type": "firebot:customvariable",
+                                        "active": true,
+                                        "ttl": 90,
+                                        "name": "$presetListArg[variant]-message",
+                                        "variableData": "Congratulations $presetListArg[user] on being $presetListArg[variant]!",
+                                        "effectLabel": "$presetListArg[variant]-message"
+                                      },
+                                      {
+                                        "id": "cdc3c110-ab47-11ee-9699-45831a3bda6f",
+                                        "type": "firebot:run-effect-list",
+                                        "active": true,
+                                        "listType": "preset",
+                                        "presetListArgs": {
+                                          "user": "$presetListArg[user]",
+                                          "variant": "$presetListArg[variant]"
+                                        },
+                                        "effectList": {
+                                          "list": [],
+                                          "id": "cdc595d0-ab47-11ee-9699-45831a3bda6f"
+                                        },
+                                        "presetListId": "431a6770-ab3e-11ee-9699-45831a3bda6f",
+                                        "effectLabel": "Update First Variant Metadata for User"
+                                      },
+                                      {
+                                        "id": "1ff13930-ab2b-11ee-9699-45831a3bda6f",
+                                        "type": "firebot:run-effect-list",
+                                        "active": true,
+                                        "listType": "preset",
+                                        "presetListArgs": {
+                                          "user": "$presetListArg[user]",
+                                          "variant": "$presetListArg[variant]"
+                                        },
+                                        "effectList": {
+                                          "list": [],
+                                          "id": "1ff2e6e0-ab2b-11ee-9699-45831a3bda6f"
+                                        },
+                                        "presetListId": "a3160c80-d883-11ed-a382-6f4f5935faa6",
+                                        "effectLabel": "Update the Bonus Currency"
+                                      },
+                                      {
+                                        "id": "e239aba0-abd8-11ee-9699-45831a3bda6f",
+                                        "type": "firebot:customvariable",
+                                        "active": true,
+                                        "ttl": 90,
+                                        "name": "$presetListArg[variant]-message",
+                                        "effectLabel": "$presetListArg[variant]-message",
+                                        "variableData": "$customVariable[$presetListArg[variant]-message] You have claimed $presetListArg[variant] $userMetadata[$presetListArg[user], placeCounts, null, $presetListArg[variant]]  times!"
+                                      },
+                                      {
+                                        "id": "3f4e40d0-abd9-11ee-9699-45831a3bda6f",
+                                        "type": "firebot:chat",
+                                        "active": true,
+                                        "chatter": "Bot",
+                                        "message": "$customVariable[$presetListArg[variant]-message]",
+                                        "sendAsReply": true,
+                                        "effectLabel": "Success message for chat"
+                                      },
+                                      {
+                                        "id": "8b1a4be0-cd9d-11ee-b38f-b5b50393e92b",
+                                        "type": "firebot:run-effect-list",
+                                        "active": true,
+                                        "listType": "preset",
+                                        "presetListArgs": {},
+                                        "effectList": {
+                                          "list": [],
+                                          "id": "8b1c20a0-cd9d-11ee-b38f-b5b50393e92b"
+                                        },
+                                        "presetListId": "934cf2f0-cd9c-11ee-8590-ddd29e9e9db6",
+                                        "effectLabel": "[SFX] Tada"
+                                      }
+                                    ],
+                                    "id": "1af8c7d0-ab27-11ee-9699-45831a3bda6f"
+                                  },
+                                  "label": "variant is not set"
+                                }
+                              ],
+                              "otherwiseEffectData": {
+                                "list": [
+                                  {
+                                    "id": "a1fe35d0-ab27-11ee-9699-45831a3bda6f",
+                                    "type": "firebot:chat",
+                                    "active": true,
+                                    "chatter": "Bot",
+                                    "message": "Sorry $presetListArg[user], but $customVariable[places, $presetListArg[variant]] was $presetListArg[variant]!",
+                                    "sendAsReply": true,
+                                    "effectLabel": "failed chat message"
+                                  }
+                                ],
+                                "id": "1af7dd70-ab27-11ee-9699-45831a3bda6f"
+                              },
+                              "otherwiseLabel": "variant is set",
+                              "effectLabel": "check/set variant"
+                            }
+                          ],
+                          "id": "3f273300-abe8-11ee-9699-45831a3bda6f"
+                        },
+                        "otherwiseLabel": "User is eligible to claim place"
+                      }
+                    ],
+                    "id": "fea255f0-ab27-11ee-9699-45831a3bda6f"
+                  },
+                  "label": "first|second|third"
+                }
+              ],
+              "otherwiseEffectData": {
+                "list": [
+                  {
+                    "id": "8b9d7de0-ab28-11ee-9699-45831a3bda6f",
+                    "type": "firebot:chat",
+                    "active": true,
+                    "chatter": "Bot",
+                    "message": "Sorry $presetListArg[user] there is no \"$presetListArg[variant]\" place! Think you're being funny, don't ya?!",
+                    "sendAsReply": true,
+                    "effectLabel": "non-existent chat message"
+                  }
+                ],
+                "id": "fea14480-ab27-11ee-9699-45831a3bda6f"
+              },
+              "effectLabel": "check 1,2,3 variant",
+              "otherwiseLabel": "anything else"
+            }
+          ],
+          "id": "be620ba1-ab1a-11ee-9699-45831a3bda6f"
+        },
+        "args": [
+          {
+            "name": "user"
+          },
+          {
+            "name": "variant"
+          }
+        ],
+        "sortTags": [
+          "05d21925-f98a-4663-bec8-4553ea78a553"
+        ],
+        "id": "be620ba0-ab1a-11ee-9699-45831a3bda6f"
+      },
+      {
+        "name": "[First] Set First Variant Metadata for a specific user",
+        "effects": {
+          "list": [
+            {
+              "id": "8db3d8c0-ab3e-11ee-9699-45831a3bda6f",
+              "type": "firebot:conditional-effects",
+              "active": true,
+              "ifs": [
+                {
+                  "conditionData": {
+                    "mode": "exclusive",
+                    "conditions": [
+                      {
+                        "type": "firebot:custom",
+                        "comparisonType": "is",
+                        "value": null,
+                        "leftSideValue": "$userMetadata[$presetListArg[user], placeCounts]"
+                      }
+                    ]
+                  },
+                  "effectData": {
+                    "list": [
+                      {
+                        "id": "de811e70-ab3e-11ee-9699-45831a3bda6f",
+                        "type": "firebot:set-user-metadata",
+                        "active": true,
+                        "username": "$presetListArg[user]",
+                        "key": "placeCounts",
+                        "data": "{\"first\":0,\"second\":0,\"third\":0}"
+                      }
+                    ],
+                    "id": "8db622b0-ab3e-11ee-9699-45831a3bda6f"
+                  },
+                  "label": "init"
+                }
+              ],
+              "otherwiseEffectData": {
+                "list": [],
+                "id": "8db53850-ab3e-11ee-9699-45831a3bda6f"
+              },
+              "otherwiseLabel": "",
+              "effectLabel": "Init placeCounts metadata"
+            },
+            {
+              "id": "edbcb240-ab3f-11ee-9699-45831a3bda6f",
+              "type": "firebot:set-user-metadata",
+              "active": true,
+              "username": "$presetListArg[user]",
+              "key": "placeCounts",
+              "data": "$math[$userMetadata[$presetListArg[user], placeCounts, null, $presetListArg[variant]] + 1]",
+              "propertyPath": "$presetListArg[variant]",
+              "effectLabel": "Updates place variant on metadata"
+            }
+          ],
+          "id": "431a8e80-ab3e-11ee-9699-45831a3bda6f"
+        },
+        "args": [
+          {
+            "name": "user"
+          },
+          {
+            "name": "variant"
+          }
+        ],
+        "sortTags": [
+          "05d21925-f98a-4663-bec8-4553ea78a553"
+        ],
+        "id": "431a6770-ab3e-11ee-9699-45831a3bda6f"
       }
     ],
     "timers": [],
