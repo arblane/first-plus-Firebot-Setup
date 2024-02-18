@@ -1,7 +1,7 @@
 {
   "name": "First plus",
   "description": "Provides chat a chance to earn extra bot currency for first, second and third. This also logs their achievement in their metadata for use in a response message or maybe a bonus multiplier (to be coded). The bonus amounts are counters and can be customized.",
-  "version": 2.1,
+  "version": 2.2,
   "author": "arblane",
   "components": {
     "commands": [
@@ -131,8 +131,7 @@
           "id": "28b3b300-79e1-11eb-a7ef-c17b486f445b",
           "list": []
         },
-        "value": 250,
-        "sortTags": []
+        "value": 250
       },
       {
         "id": "c4e93eef-3798-4eaf-980f-1c9c16fd2294",
@@ -150,8 +149,7 @@
           "id": "35f4cbd0-79e1-11eb-a7ef-c17b486f445b",
           "list": []
         },
-        "value": 125,
-        "sortTags": []
+        "value": 125
       },
       {
         "id": "0e1b50b3-0e52-4de9-acdc-ee254bb29936",
@@ -169,8 +167,7 @@
           "id": "42eb2000-79e1-11eb-a7ef-c17b486f445b",
           "list": []
         },
-        "value": 50,
-        "sortTags": []
+        "value": 50
       }
     ],
     "currencies": [
@@ -219,9 +216,9 @@
               "listType": "preset",
               "presetListArgs": {
                 "claim": "$presetListArg[first variant]",
-                "user": "$presetListArg[user]",
+                "user": "$#user",
                 "first variant": "$presetListArg[firstVariant]",
-                "firstVariant": "$presetListArg[variant]"
+                "firstVariant": "$#variant"
               },
               "effectList": {
                 "list": [],
@@ -243,7 +240,7 @@
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$customVariable[$presetListArg[user]-$presetListArg[firstVariant]-count]",
+                        "leftSideValue": "$customVariable[$#user-$#firstVariant-count]",
                         "rightSideValue": "0"
                       }
                     ]
@@ -254,8 +251,8 @@
                         "id": "04cae370-cfe1-11ed-a52f-5bdbbc96a943",
                         "type": "firebot:set-user-metadata",
                         "active": true,
-                        "username": "$presetListArg[user]",
-                        "key": "$presetListArg[firstVariant]",
+                        "username": "$#user",
+                        "key": "$#firstVariant",
                         "data": "1"
                       }
                     ],
@@ -269,9 +266,9 @@
                     "id": "593cc720-cfe1-11ed-a52f-5bdbbc96a943",
                     "type": "firebot:set-user-metadata",
                     "active": true,
-                    "username": "$presetListArg[user]",
-                    "key": "$presetListArg[firstVariant]",
-                    "data": "$math[$customVariable[$presetListArg[user]-$presetListArg[firstVariant]-count] + 1]"
+                    "username": "$#user",
+                    "key": "$#firstVariant",
+                    "data": "$math[$customVariable[$#user-$#firstVariant-count] + 1]"
                   }
                 ],
                 "id": "bcb441e0-cfdf-11ed-a52f-5bdbbc96a943"
@@ -305,9 +302,9 @@
               "listType": "preset",
               "presetListArgs": {
                 "claim": "$presetListArg[claim]",
-                "user": "$presetListArg[user]",
+                "user": "$#user",
                 "first variant": "$presetListArg[first variant]",
-                "firstVariant": "$presetListArg[firstVariant]"
+                "firstVariant": "$#firstVariant"
               },
               "effectList": {
                 "list": [],
@@ -321,7 +318,7 @@
               "type": "firebot:chat",
               "active": true,
               "chatter": "Streamer",
-              "message": "$username has claimed $presetListArg[firstVariant] $customVariable[$presetListArg[user]-$presetListArg[firstVariant]-count] times!"
+              "message": "$user has claimed $#firstVariant $customVariable[$#user-$#firstVariant-count] times!"
             }
           ],
           "id": "e8ebcf00-cfe2-11ed-a52f-5bdbbc96a943"
@@ -348,8 +345,8 @@
               "type": "firebot:customvariable",
               "active": true,
               "ttl": 15,
-              "name": "$presetListArg[user]-$presetListArg[firstVariant]-count",
-              "variableData": "$math[$userMetadata[$presetListArg[user], $presetListArg[firstVariant], 0]]"
+              "name": "$#user-$#firstVariant-count",
+              "variableData": "$math[$userMetadata[$#user, $#firstVariant, 0]]"
             }
           ],
           "id": "faa95340-d869-11ed-a382-6f4f5935faa6"
@@ -384,7 +381,7 @@
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$presetListArg[variant]",
+                        "leftSideValue": "$#variant",
                         "rightSideValue": "first"
                       }
                     ]
@@ -401,7 +398,7 @@
                         "target": "individual",
                         "chatter": "Streamer",
                         "amount": "$counter[BonusForFirst]",
-                        "userTarget": "$presetListArg[user]"
+                        "userTarget": "$#user"
                       },
                       {
                         "id": "02d91c60-abd9-11ee-9699-45831a3bda6f",
@@ -424,7 +421,7 @@
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$presetListArg[variant]",
+                        "leftSideValue": "$#variant",
                         "rightSideValue": "second"
                       }
                     ]
@@ -441,7 +438,7 @@
                         "target": "individual",
                         "chatter": "Streamer",
                         "amount": "$counter[BonusForSecond]",
-                        "userTarget": "$presetListArg[user]"
+                        "userTarget": "$#user"
                       },
                       {
                         "id": "19448d40-abd9-11ee-9699-45831a3bda6f",
@@ -464,7 +461,7 @@
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$presetListArg[variant]",
+                        "leftSideValue": "$#variant",
                         "rightSideValue": "third"
                       }
                     ]
@@ -481,7 +478,7 @@
                         "target": "individual",
                         "chatter": "Streamer",
                         "amount": "$counter[BonusForThird]",
-                        "userTarget": "$presetListArg[user]"
+                        "userTarget": "$#user"
                       },
                       {
                         "id": "19448d40-abd9-11ee-9699-45831a3bda6f",
@@ -535,7 +532,7 @@
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$customVariable[places]"
+                        "leftSideValue": "$$places"
                       }
                     ]
                   },
@@ -575,21 +572,21 @@
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                        "leftSideValue": "$lowercase[$trim[$#variant]]",
                         "rightSideValue": "first"
                       },
                       {
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                        "leftSideValue": "$lowercase[$trim[$#variant]]",
                         "rightSideValue": "second"
                       },
                       {
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                        "leftSideValue": "$lowercase[$trim[$#variant]]",
                         "rightSideValue": "third"
                       }
                     ]
@@ -610,7 +607,7 @@
                                   "comparisonType": "contains",
                                   "value": null,
                                   "leftSideValue": "$$places",
-                                  "rightSideValue": "$presetListArg[user]"
+                                  "rightSideValue": "$#user"
                                 }
                               ]
                             },
@@ -630,14 +627,14 @@
                                             "comparisonType": "contains",
                                             "value": null,
                                             "leftSideValue": "$$places",
-                                            "rightSideValue": "$presetListArg[user]"
+                                            "rightSideValue": "$#user"
                                           }
                                         ]
                                       },
                                       "effectData": {
                                         "list": [
                                           {
-                                            "id": "89e04f60-abea-11ee-9699-45831a3bda6f",
+                                            "id": "b0f62e40-ce85-11ee-8ff8-1fd9288b7b06",
                                             "type": "firebot:conditional-effects",
                                             "active": true,
                                             "ifs": [
@@ -649,8 +646,8 @@
                                                       "type": "firebot:custom",
                                                       "comparisonType": "is",
                                                       "value": null,
-                                                      "leftSideValue": "$replace[$objectWalkPath[$$places, first], \"\\\"\", \"\"]",
-                                                      "rightSideValue": "$presetListArg[user]"
+                                                      "leftSideValue": "$$places[first]",
+                                                      "rightSideValue": "$#user"
                                                     }
                                                   ]
                                                 },
@@ -677,8 +674,8 @@
                                                       "type": "firebot:custom",
                                                       "comparisonType": "is",
                                                       "value": null,
-                                                      "leftSideValue": "$replace[$objectWalkPath[$$places, second], \"\\\"\", \"\"]",
-                                                      "rightSideValue": "$presetListArg[user]"
+                                                      "leftSideValue": "$$places[second]",
+                                                      "rightSideValue": "$#user"
                                                     }
                                                   ]
                                                 },
@@ -705,8 +702,8 @@
                                                       "type": "firebot:custom",
                                                       "comparisonType": "is",
                                                       "value": null,
-                                                      "leftSideValue": "$replace[$objectWalkPath[$$places, third], \"\\\"\", \"\"]",
-                                                      "rightSideValue": "$presetListArg[user]"
+                                                      "leftSideValue": "$$places[third]",
+                                                      "rightSideValue": "$#user"
                                                     }
                                                   ]
                                                 },
@@ -737,7 +734,7 @@
                                             "type": "firebot:chat",
                                             "active": true,
                                             "chatter": "Bot",
-                                            "message": "You have already claimed $customVariable[placeClaimed]!",
+                                            "message": "You have already claimed $$placeClaimed!",
                                             "sendAsReply": true
                                           }
                                         ],
@@ -753,14 +750,14 @@
                                             "type": "firebot:custom",
                                             "comparisonType": "is",
                                             "value": null,
-                                            "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                                            "leftSideValue": "$lowercase[$trim[$#variant]]",
                                             "rightSideValue": "first"
                                           },
                                           {
                                             "type": "firebot:custom",
                                             "comparisonType": "is not",
                                             "value": null,
-                                            "leftSideValue": "$objectWalkPath[$$places, first]",
+                                            "leftSideValue": "$$places[first]",
                                             "rightSideValue": "\"\""
                                           }
                                         ]
@@ -772,7 +769,7 @@
                                             "type": "firebot:chat",
                                             "active": true,
                                             "chatter": "Bot",
-                                            "message": "$replace[$objectWalkPath[$customVariable[places], first], \"\\\"\", \"\"] has already claimed first!",
+                                            "message": "$$places[first] has already claimed first!",
                                             "sendAsReply": true
                                           }
                                         ],
@@ -788,14 +785,14 @@
                                             "type": "firebot:custom",
                                             "comparisonType": "is",
                                             "value": null,
-                                            "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                                            "leftSideValue": "$lowercase[$trim[$#variant]]",
                                             "rightSideValue": "second"
                                           },
                                           {
                                             "type": "firebot:custom",
                                             "comparisonType": "is not",
                                             "value": null,
-                                            "leftSideValue": "$objectWalkPath[$$places, second]",
+                                            "leftSideValue": "$$places[second]",
                                             "rightSideValue": "\"\""
                                           }
                                         ]
@@ -807,7 +804,7 @@
                                             "type": "firebot:chat",
                                             "active": true,
                                             "chatter": "Bot",
-                                            "message": "$replace[$objectWalkPath[$customVariable[places], second], \"\\\"\", \"\"] has already claimed second!",
+                                            "message": "$$places[second] has already claimed second!",
                                             "sendAsReply": true
                                           }
                                         ],
@@ -823,14 +820,14 @@
                                             "type": "firebot:custom",
                                             "comparisonType": "is",
                                             "value": null,
-                                            "leftSideValue": "$lowercase[$trim[$presetListArg[variant]]]",
+                                            "leftSideValue": "$lowercase[$trim[$#variant]]",
                                             "rightSideValue": "third"
                                           },
                                           {
                                             "type": "firebot:custom",
                                             "comparisonType": "is not",
                                             "value": null,
-                                            "leftSideValue": "$objectWalkPath[$$places, third]"
+                                            "leftSideValue": "$$places[third]"
                                           }
                                         ]
                                       },
@@ -841,7 +838,7 @@
                                             "type": "firebot:chat",
                                             "active": true,
                                             "chatter": "Bot",
-                                            "message": "$replace[$objectWalkPath[$customVariable[places], third], \"\\\"\", \"\"] has already claimed third!",
+                                            "message": "$$places[third] has already claimed third!",
                                             "sendAsReply": true
                                           }
                                         ],
@@ -876,7 +873,7 @@
                                         "type": "firebot:custom",
                                         "comparisonType": "is",
                                         "value": null,
-                                        "leftSideValue": "$customVariable[places,$presetListArg[variant]]"
+                                        "leftSideValue": "$$places[$#variant]"
                                       }
                                     ]
                                   },
@@ -888,17 +885,17 @@
                                         "active": true,
                                         "ttl": 0,
                                         "name": "places",
-                                        "variableData": "$presetListArg[user]",
-                                        "propertyPath": "$presetListArg[variant]",
+                                        "variableData": "$#user",
+                                        "propertyPath": "$#variant",
                                         "effectLabel": "Current Stream Places"
                                       },
                                       {
                                         "id": "a2c30700-abd8-11ee-9699-45831a3bda6f",
                                         "type": "firebot:customvariable",
                                         "active": true,
-                                        "ttl": 90,
+                                        "ttl": 15,
                                         "name": "$presetListArg[variant]-message",
-                                        "variableData": "Congratulations $presetListArg[user] on being $presetListArg[variant]!",
+                                        "variableData": "Congratulations $#user on being $#variant!",
                                         "effectLabel": "$presetListArg[variant]-message"
                                       },
                                       {
@@ -907,8 +904,8 @@
                                         "active": true,
                                         "listType": "preset",
                                         "presetListArgs": {
-                                          "user": "$presetListArg[user]",
-                                          "variant": "$presetListArg[variant]"
+                                          "user": "$#user",
+                                          "variant": "$#variant"
                                         },
                                         "effectList": {
                                           "list": [],
@@ -923,8 +920,8 @@
                                         "active": true,
                                         "listType": "preset",
                                         "presetListArgs": {
-                                          "user": "$presetListArg[user]",
-                                          "variant": "$presetListArg[variant]"
+                                          "user": "$#user",
+                                          "variant": "$#variant"
                                         },
                                         "effectList": {
                                           "list": [],
@@ -937,10 +934,10 @@
                                         "id": "e239aba0-abd8-11ee-9699-45831a3bda6f",
                                         "type": "firebot:customvariable",
                                         "active": true,
-                                        "ttl": 90,
+                                        "ttl": 15,
                                         "name": "$presetListArg[variant]-message",
                                         "effectLabel": "$presetListArg[variant]-message",
-                                        "variableData": "$customVariable[$presetListArg[variant]-message] You have claimed $presetListArg[variant] $userMetadata[$presetListArg[user], placeCounts, null, $presetListArg[variant]]  times!"
+                                        "variableData": "$customVariable[$presetListArg[variant]-message] You have claimed $#variant $userMetadata[$#user, placeCounts, null, $#variant]  times!"
                                       },
                                       {
                                         "id": "3f4e40d0-abd9-11ee-9699-45831a3bda6f",
@@ -977,7 +974,7 @@
                                     "type": "firebot:chat",
                                     "active": true,
                                     "chatter": "Bot",
-                                    "message": "Sorry $presetListArg[user], but $customVariable[places, $presetListArg[variant]] was $presetListArg[variant]!",
+                                    "message": "Sorry $#user, but $$places[$#variant] was $#variant!",
                                     "sendAsReply": true,
                                     "effectLabel": "failed chat message"
                                   }
@@ -1005,7 +1002,7 @@
                     "type": "firebot:chat",
                     "active": true,
                     "chatter": "Bot",
-                    "message": "Sorry $presetListArg[user] there is no \"$presetListArg[variant]\" place! Think you're being funny, don't ya?!",
+                    "message": "Sorry $#user there is no \"$#variant\" place! Think you're being funny, don't ya?!",
                     "sendAsReply": true,
                     "effectLabel": "non-existent chat message"
                   }
@@ -1048,7 +1045,7 @@
                         "type": "firebot:custom",
                         "comparisonType": "is",
                         "value": null,
-                        "leftSideValue": "$userMetadata[$presetListArg[user], placeCounts]"
+                        "leftSideValue": "$userMetadata[$#user, placeCounts]"
                       }
                     ]
                   },
@@ -1058,7 +1055,7 @@
                         "id": "de811e70-ab3e-11ee-9699-45831a3bda6f",
                         "type": "firebot:set-user-metadata",
                         "active": true,
-                        "username": "$presetListArg[user]",
+                        "username": "$#user",
                         "key": "placeCounts",
                         "data": "{\"first\":0,\"second\":0,\"third\":0}"
                       }
@@ -1079,9 +1076,9 @@
               "id": "edbcb240-ab3f-11ee-9699-45831a3bda6f",
               "type": "firebot:set-user-metadata",
               "active": true,
-              "username": "$presetListArg[user]",
+              "username": "$#user",
               "key": "placeCounts",
-              "data": "$math[$userMetadata[$presetListArg[user], placeCounts, null, $presetListArg[variant]] + 1]",
+              "data": "$math[$userMetadata[$#user, placeCounts, null, $#variant] + 1]",
               "propertyPath": "$presetListArg[variant]",
               "effectLabel": "Updates place variant on metadata"
             }
